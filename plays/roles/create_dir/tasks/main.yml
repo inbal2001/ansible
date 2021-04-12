@@ -1,0 +1,8 @@
+---
+# tasks file for create_dir
+
+- name: Create directory to mount
+  file:
+    path: "{{ dir_path }}"
+    state: directory
+    mode: '0755'

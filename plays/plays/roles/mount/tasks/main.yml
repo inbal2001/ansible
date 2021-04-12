@@ -1,0 +1,14 @@
+---
+# tasks file for mount
+
+- name: Create ext4 filesystem on lv
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ vg_name}}/{{ lv.name }}"
+
+- name: Create mount point
+  mount:
+    path: "{{ dir_path }}"
+    src: "/dev/{{ vg_name}}/{{ lv.name }}"
+    fstype: ext4
+    state: mounted

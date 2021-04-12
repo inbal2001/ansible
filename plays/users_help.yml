@@ -1,0 +1,17 @@
+---
+- name: Create users in database host group with the secret.yml vault
+  user:
+    name: "{{ item.username }}"
+    uid: "{{ item.uid }}"
+    append: yes
+    groups: wheel
+    password: "{{ user_password | password_hash('sha512') }}"
+    shell: /bin/bash
+    generate_ssh_key: yes
+    state: present
+                                                           
+- name: Config ssh keys
+  copy:
+    remote_src: yes
+    src: /home/automation/.ssh/authorized_keys
+    dest: "/home/{{ item.username }}/.ssh/authorized_keys"

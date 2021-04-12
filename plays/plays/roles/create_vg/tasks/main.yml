@@ -1,0 +1,8 @@
+---
+# tasks file for create_vg
+
+- name: Create a volume group on top of /dev/sdb1 and /dev/sdb2
+  lvg:
+    vg: "{{ vg_name }}"
+    pvs: "{{ item.device ~ item.number}}"
+  loop: "{{ partitions }}"

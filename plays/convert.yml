@@ -1,0 +1,11 @@
+---
+name: Tinus Lorvald
+job: artist
+car:
+  type: Volvo
+  color: Red
+  year: 2017
+kids:
+- alice
+- bob
+- eve

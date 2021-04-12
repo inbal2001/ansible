@@ -1,0 +1,17 @@
+---
+# tasks file for create_partitions
+
+- name: print
+  debug:
+    var: item.device
+  loop: "{{ partitions }}"
+
+- name: Create a new primary partitions
+  parted:
+    device: "{{ item.device }}"
+    number: "{{ item.number }}"
+    unit: MB
+    part_start: "{{ item.start }}"
+    part_end: "{{ item.end }}"
+    state: present
+  loop: "{{ partitions }}"

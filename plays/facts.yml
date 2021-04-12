@@ -1,0 +1,16 @@
+---
+- hosts: database
+  become: yes
+
+  tasks:
+
+    - name: Create custom fact directory
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+        recurse: yes
+
+    - name: Copy the content to the file
+      copy:
+        content: "[sample_exam]\nserver_role=mysql\n"
+        dest: /etc/ansible/facts.d/custom.fact

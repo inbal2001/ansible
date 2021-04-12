@@ -1,0 +1,33 @@
+---
+# tasks file for sample-apache
+
+- name: Make sure httpd, mod_ssl and php are installed
+  yum:
+    name:
+      - httpd
+      - mod_ssl
+      - php
+    state: present
+
+- name: Make sure Apache service is up and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Config firewall to allow all traffic on HTTP port TCP 80, HTTPS port TCP 443
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop:
+    - "80/tcp"
+    - "443/tcp"
+
+- name: Restart Apache service when /var/www/html/index.html is modified
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+  when: "ansible_service_mgr == 'systemd'"
+  notify: Restart Apache

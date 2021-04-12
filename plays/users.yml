@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars_files:
+    - /home/automation/plays/vars/user_list.yml
+    - /home/automation/plays/secret.yml
+
+  tasks:
+    - name: Create users with uid starts with 1 and config ssh keys on webservers group
+      include_tasks: users_help.yml
+      loop: "{{ users }}"
+      when: 
+        - "item.uid|string|first == '1'"
+        - inventory_hostname in groups['webservers']
+    
+    - name: Create users with uid starts with 2 and config ssh keys on webservers group
+      include_tasks: users_help.yml
+      loop: "{{ users }}"
+      when: 
+        - "item.uid|string|first == '2'"
+        - inventory_hostname in groups['database']

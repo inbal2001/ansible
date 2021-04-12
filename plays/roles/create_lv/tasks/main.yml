@@ -1,0 +1,8 @@
+---
+# tasks file for create_lv
+
+- name: Create lv on top of my_vg with size of 500M
+  lvol:
+    vg: "{{ vg_name }}"
+    lv: "{{ lv.name }}"
+    size: "{{ lv.size }}"

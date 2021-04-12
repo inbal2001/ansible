@@ -1,0 +1,18 @@
+---
+- hosts: database
+  become: yes
+
+  tasks:
+
+    - name: Create /mnt/mysql_backups/database_list.txt with the following line
+      lineinfile:
+        path: /mnt/mysql_backups/database_list.txt
+        line: dev,test,qa,prod
+        create: yes
+        state: present
+
+    - name: Create an archive of the file database_list.txt and stored in specified location
+      archive:
+        path: /mnt/mysql_backups/database_list.txt
+        dest: /mnt/mysql_backups/archive.gz
+

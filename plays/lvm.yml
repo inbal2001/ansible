@@ -1,0 +1,9 @@
+---
+- hosts: proxy
+  become: yes
+  roles:
+    - create_partitions
+    - create_vg
+    - create_lv
+    - create_dir
+    - mount

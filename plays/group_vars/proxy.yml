@@ -1,0 +1,18 @@
+---
+partitions:
+  - number: 1
+    device: /dev/sdb
+    start: 0MB
+    end: 1.5GB
+  - number: 2
+    device: /dev/sdb
+    start: 1.5GB
+    end: 3GB
+
+vg_name: my_vg
+
+lv:
+  name: my_lv
+  size: 600
+
+dir_path: /home/automation/test

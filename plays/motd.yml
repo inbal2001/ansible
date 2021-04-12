@@ -1,0 +1,24 @@
+---
+- hosts: proxy
+  tasks:
+   - name: Replace content of /etc/motd with "Welcome to HAProxy server"
+     ansible.builtin.lineinfile:
+       path: /etc/motd
+       regexp: ".*"
+       line: "Welcome to HAProxy server"
+
+- hosts: webservers
+  tasks:
+    - name: Replace content of /etc/motd with "Welcome to Apache server"
+      ansible.builtin.lineinfile:
+        path: /etc/motd
+        regexp: ".*"
+        line: "Welcome to Apache server"
+
+- hosts: database
+  tasks:
+   - name: Replace content of /etc/motd with "Welcome to MySQL server"
+     ansible.builtin.lineinfile:
+       path: /etc/motd
+       regexp: ".*"
+       line: "Welcome to MySQL server"

@@ -1,0 +1,18 @@
+---
+- hosts: proxy
+  become: yes
+   
+  tasks:
+
+    - name: Ensure file exists
+      file:
+        path: /var/log/time.log
+        state: touch
+        mode: 0644
+
+    - name: Create a crontab file that appends the file /var/log/time.log with the current date
+      cron:
+        name: "adds time to /var/log/time.log"
+        minute: "0"
+        user: root
+        job: "date >> /var/log/time.log"
